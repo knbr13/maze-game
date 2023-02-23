@@ -4,7 +4,6 @@ var isClicked = false;
 var gameBounds = document.getElementById("game").getBoundingClientRect();
 var key = document.createElement('a');
 key.textContent = ""
-key.addEventListener("mousedown", () => console.log(19203981))
 key.style.cssText = "width: 10%; height: 10%; font-size: 12px; position: absolute; left: 38%; top: 33%; background-color: blue; border-radius: 40%; border: 0.1px solid white"
 start.appendChild(key);
 key.addEventListener("mousedown", mouseClicked);
@@ -17,6 +16,8 @@ function move(e){
     start.style.top = `${e.clientY - 15 - gameBounds.top}px`;
     start.style.left = `${e.clientX - 15 - gameBounds.left}px`;
     checkForCollision(boundaries);
+    checkWin() ? youWin(): null;
+    fallDown();
 }
 function checkForCollision(arrOfElements){
     Array.from(arrOfElements).forEach((element) => {
@@ -39,4 +40,29 @@ function checkForCollision(arrOfElements){
             document.removeEventListener("mousemove", move);
         }
     })
+}
+function checkWin(){
+    return start.getBoundingClientRect().right >= gameBounds.right - 40? true: false;
+}
+function youWin(){
+    boundaries[boundaries.length - 1].textContent = `Score: ${Number((boundaries[boundaries.length - 1].textContent).slice(6)) + 5}`;
+    document.removeEventListener("mousemove", move);
+}
+function fallDown(){
+    if(start.getBoundingClientRect().right<gameBounds.left){
+        document.removeEventListener("mousemove", move);
+        var interval = setInterval(() => {
+            start.style.top = `${a}px`;
+            a += 1.8;
+            start.getBoundingClientRect().bottom > innerHeight - 10? start.remove(): null;
+        }, 1), a = 205;
+        setTimeout(()=> {
+            clearInterval(interval);
+            youLose();
+        }, 2000);
+    }
+}
+document.addEventListener("mousedown", (e) => console.log(e.clientX, e.clientY))
+function youLose(){
+
 }

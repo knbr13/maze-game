@@ -1,0 +1,112 @@
+/*
+Game Lab CSS file
+You don't need to download or edit this file.
+*/
+
+h1, h2 {
+	text-align: center;
+}
+
+p {
+	width: 600px;
+	margin: 1em auto;
+}
+
+#game {
+	margin: auto;
+	position: relative;
+	height: 300px;
+	width: 500px;
+}
+
+#start, #end {
+	position: absolute;
+	top: 205px;
+	height: 30px;
+	width: 30px;
+	border: 1px solid black;
+	padding: 5px;
+	cursor: default;
+	
+	font-family: "Helvetica", "Arial", sans-serif;
+	font-size: 25pt;
+	text-align: center;
+}
+
+#game #start {
+	background-color: #88ff88;
+	left: 0;
+}
+
+#game #end {
+	background-color: #8888ff;
+	right: 0;
+}
+
+div.boundary {
+	background-color: #eeeeee;
+	border: 1px solid black;
+}
+
+div.boundary.example {
+	margin: auto;
+	width: 100px;
+	height: 25px;
+}
+
+div.youlose {
+	background-color: #ff8888;
+}
+
+/*
+Hack hack hack; these are CSS "sibling selectors" for selecting
+neighboring elements.  Necessary to avoid giving ids to the boundary divs
+*/
+
+#game div.boundary {
+	position: absolute;
+	
+	top: 0;
+	left: 0;
+	height: 200px;
+	width: 150px;
+	z-index: 1;
+}
+
+#game div.boundary + div.boundary {
+	border-left: none;
+	border-right: none;
+	z-index: 2;
+	
+	left: 151px;
+	height: 50px;
+	width: 198px;
+}
+
+#game div.boundary + div.boundary + div.boundary {
+	border-left: 1px black solid;
+	border-right: 1px black solid;
+	z-index: 1;
+	
+	left: 348px;
+	height: 200px;
+	width: 150px;
+}
+
+#game div.boundary + div.boundary + div.boundary + div.boundary {
+	border: 1px black solid;
+	
+	top: 250px;
+	left: 0;
+	height: 48px;
+	width: 498px;
+}
+
+#game div.boundary + div.boundary + div.boundary + div.boundary + div.boundary {
+	border-bottom: none;
+	
+	top: 100px;
+	left: 200px;
+	height: 150px;
+	width: 98px;
+}

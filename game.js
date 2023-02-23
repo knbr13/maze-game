@@ -6,6 +6,8 @@ var key = document.createElement('a');
 key.textContent = ""
 key.style.cssText = "width: 10%; height: 10%; font-size: 12px; position: absolute; left: 38%; top: 33%; background-color: blue; border-radius: 40%; border: 0.1px solid white"
 start.appendChild(key);
+document.getElementById("end").addEventListener("mousedown", reset);
+start.addEventListener("mousedown", reset);
 key.addEventListener("mousedown", mouseClicked);
 function mouseClicked(e){
     e.stopPropagation();
@@ -45,6 +47,11 @@ function checkWin(){
     return start.getBoundingClientRect().right >= gameBounds.right - 40? true: false;
 }
 function youWin(){
+    var you_win = document.createElement("h1");
+    you_win.textContent = "You Win!";
+    you_win.style.cssText = "z-index: 10; font-family: cursive; position: fixed; left: 45%; color: purple; top: 24%;";
+    document.getElementById("game").appendChild(you_win);
+    setTimeout(()=> you_win.remove(), 2000);
     boundaries[boundaries.length - 1].textContent = `Score: ${Number((boundaries[boundaries.length - 1].textContent).slice(6)) + 5}`;
     document.removeEventListener("mousemove", move);
 }
@@ -54,15 +61,22 @@ function fallDown(){
         var interval = setInterval(() => {
             start.style.top = `${a}px`;
             a += 1.8;
-            start.getBoundingClientRect().bottom > innerHeight - 10? start.remove(): null;
+            start.getBoundingClientRect().bottom > innerHeight - 10? start.style.display = `none`: null;
         }, 1), a = 205;
         setTimeout(()=> {
             clearInterval(interval);
             youLose();
-        }, 2000);
+        }, 1000);
     }
 }
-document.addEventListener("mousedown", (e) => console.log(e.clientX, e.clientY))
 function youLose(){
-
+    var you_lose = document.createElement("h1");
+    you_lose.textContent = "You Lose!";
+    you_lose.style.cssText = "z-index: 10; font-family: cursive; position: fixed; left: 45%; color: purple; top: 24%;";
+    document.getElementById("game").appendChild(you_lose);
+    setTimeout(()=> you_lose.remove(), 2000);
+    boundaries[boundaries.length - 1].textContent = `Score: ${Number((boundaries[boundaries.length - 1].textContent).slice(6)) - 5}`;
+}
+function reset(e){
+    start.style.cssText = "position: absolute; top: 205px";
 }

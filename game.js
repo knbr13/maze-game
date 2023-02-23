@@ -1,19 +1,44 @@
+var boundaries = document.getElementsByClassName("boundary");
 var start = document.getElementById("start");
 var isClicked = false;
 var gameBounds = document.getElementById("game").getBoundingClientRect();
-start.addEventListener("mousedown", mouseClicked);
+var key = document.createElement('a');
+key.textContent = ""
+key.addEventListener("mousedown", () => console.log(19203981))
+key.style.cssText = "width: 10%; height: 10%; font-size: 12px; position: absolute; left: 40%; top: 35%; background-color: blue; border-radius: 40%; border: 0.1px solid white"
+start.appendChild(key);
 
-console.log(gameBounds.left);
-console.log(gameBounds.top);
-
+key.addEventListener("mousedown", mouseClicked);
 function mouseClicked(e){
+    e.stopPropagation();
     isClicked ? isClicked = false: isClicked = true;
     document.addEventListener("mousemove", move);
 }
-
 function move(e){
-    console.log(e.clientX);
-    console.log(e.clientY);
     start.style.top = `${e.clientY - 15 - gameBounds.top}px`;
     start.style.left = `${e.clientX - 15 - gameBounds.left}px`;
+    checkForCollision(boundaries);
 }
+function checkForCollision(arrOfElements){
+    Array.from(arrOfElements).forEach((element) => {
+        var elementBounds = element.getBoundingClientRect();
+        if( (start.getBoundingClientRect().left >= elementBounds.left && start.getBoundingClientRect().right <= elementBounds.right) 
+        && (start.getBoundingClientRect().bottom > elementBounds.bottom && start.getBoundingClientRect().top <= elementBounds.bottom) ){
+            element.style.borderBottom = `3px solid red`;
+            document.removeEventListener("mousemove", move);
+        }else if((start.getBoundingClientRect().left >= elementBounds.left && start.getBoundingClientRect().right <= elementBounds.right) 
+        && (start.getBoundingClientRect().bottom >= elementBounds.top && start.getBoundingClientRect().top < elementBounds.top) ){
+            element.style.borderTop = `3px solid red`;
+            document.removeEventListener("mousemove", move);
+        }else if( (start.getBoundingClientRect().top >= elementBounds.top && start.getBoundingClientRect().bottom <= elementBounds.bottom) 
+        && (start.getBoundingClientRect().right >= elementBounds.left && start.getBoundingClientRect().left < elementBounds.left) ){
+            element.style.borderLeft = `3px solid red`;
+            document.removeEventListener("mousemove", move);
+        }else if( (start.getBoundingClientRect().top >= elementBounds.top && start.getBoundingClientRect().bottom <= elementBounds.bottom) 
+        && (start.getBoundingClientRect().left <= elementBounds.right && start.getBoundingClientRect().right > elementBounds.right) ){
+            element.style.borderRight = `3px solid red`;
+            document.removeEventListener("mousemove", move);
+        }
+    })
+}   
+document.addEventListener("click",(e) => console.log(e.clientX, e.clientY))

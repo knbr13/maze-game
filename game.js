@@ -5,8 +5,8 @@ var gameBounds = document.getElementById("game").getBoundingClientRect();
 var key = document.createElement('a');
 var topWalls = [], bottomWalls = [], rightWalls = [], leftWalls = [];
 var resetButton = document.createElement("button");
-resetButton.textContent = "reset game"
-resetButton.style.cssText = "position: relative; display: block; top: 120px; margin: auto;";
+resetButton.textContent = "reset game";
+resetButton.style.cssText = "position: relative; display: block; top: 120px; margin: auto; border-radius: 14px; border-color: gray;";
 boundaries[4].appendChild(resetButton);
 resetButton.addEventListener("click", () => location.reload());
 boundaries[boundaries.length - 1].textContent = `Score: 0`;
@@ -71,6 +71,7 @@ function youWin() {
     document.getElementById("game").appendChild(you_win);
     setTimeout(() => you_win.remove(), 2000);
     boundaries[boundaries.length - 1].textContent = `Score: ${Number((boundaries[boundaries.length - 1].textContent).slice(6)) + 5}`;
+    boundaries[boundaries.length - 1].style.cssText = "text-align: center; border-radius: 10px; line-height: 24px;";
     document.removeEventListener("mousemove", move);
 }
 function fallDown() {
@@ -88,6 +89,9 @@ function fallDown() {
     }
 }
 function youLose() {
+    Array.from(boundaries).forEach((element) => {
+        element.style.cssText = "background-color: #ff9999;";
+    });
     var alertSound = document.createElement("audio");
     alertSound.src = "./sounds/alert_sound.mp3";
     alertSound.volume = 1;
@@ -98,8 +102,12 @@ function youLose() {
     document.getElementById("game").appendChild(you_lose);
     setTimeout(() => you_lose.remove(), 2000);
     boundaries[boundaries.length - 1].textContent = `Score: ${Number((boundaries[boundaries.length - 1].textContent).slice(6)) - 10}`;
+    boundaries[boundaries.length - 1].style.cssText = "text-align: center; border-radius: 10px; line-height: 24px;";
 }
 function reset(e) {
+    Array.from(boundaries).forEach((element) => {
+        element.style.cssText = "background-color: #eeeeee;";
+    });
     start.style.cssText = "position: absolute; top: 205px";
     topWalls.forEach((elem) => {
         elem.style.cssText = "border-bottom: 1px black solid;";
@@ -113,4 +121,6 @@ function reset(e) {
     leftWalls.forEach((elem) => {
         elem.style.cssText = "border-left: 1px black solid;";
     });
+    boundaries[boundaries.length - 1].style.cssText = "text-align: center; border-radius: 10px; line-height: 24px;";
 }
+boundaries[boundaries.length - 1].style.cssText = "text-align: center; border-radius: 10px; line-height: 24px;";

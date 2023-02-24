@@ -3,6 +3,7 @@ var start = document.getElementById("start");
 var isClicked = false;
 var gameBounds = document.getElementById("game").getBoundingClientRect();
 var key = document.createElement('a');
+var topWalls = [], bottomWalls = [], rightWalls = [], leftWalls = [];
 key.textContent = ""
 key.style.cssText = "width: 10%; height: 10%; font-size: 12px; position: absolute; left: 38%; top: 33%; background-color: blue; border-radius: 40%; border: 0.1px solid white"
 start.appendChild(key);
@@ -27,21 +28,25 @@ function checkForCollision(arrOfElements){
         if( (start.getBoundingClientRect().left >= elementBounds.left - 40 && start.getBoundingClientRect().right <= elementBounds.right + 40) 
         && (start.getBoundingClientRect().bottom > elementBounds.bottom && start.getBoundingClientRect().top <= elementBounds.bottom) ){
             element.style.borderBottom = `3px solid red`;
+            topWalls.push(element);
             document.removeEventListener("mousemove", move);
             youLose();
         }else if((start.getBoundingClientRect().left >= elementBounds.left - 40  && start.getBoundingClientRect().right <= elementBounds.right + 40) 
         && (start.getBoundingClientRect().bottom >= elementBounds.top && start.getBoundingClientRect().top < elementBounds.top) ){
             element.style.borderTop = `3px solid red`;
+            bottomWalls.push(element);
             document.removeEventListener("mousemove", move);
             youLose();
         }else if( (start.getBoundingClientRect().top >= elementBounds.top - 40 && start.getBoundingClientRect().bottom <= elementBounds.bottom + 40) 
         && (start.getBoundingClientRect().right >= elementBounds.left && start.getBoundingClientRect().left < elementBounds.left) ){
             element.style.borderLeft = `3px solid red`;
+            rightWalls.push(element);
             document.removeEventListener("mousemove", move);
             youLose();
         }else if( (start.getBoundingClientRect().top >= elementBounds.top - 40 && start.getBoundingClientRect().bottom <= elementBounds.bottom + 40) 
         && (start.getBoundingClientRect().left <= elementBounds.right && start.getBoundingClientRect().right > elementBounds.right) ){
             element.style.borderRight = `3px solid red`;
+            leftWalls.push(element);
             document.removeEventListener("mousemove", move);
             youLose();
         }
@@ -91,4 +96,16 @@ function youLose(){
 }
 function reset(e){
     start.style.cssText = "position: absolute; top: 205px";
+    topWalls.forEach((elem) => {
+        elem.style.cssText = "border-bottom: 1px black solid;";
+    });
+    bottomWalls.forEach((elem) => {
+        elem.style.cssText = "border-top: 1px black solid;";
+    });
+    rightWalls.forEach((elem) => {
+        elem.style.cssText = "border-right: 1px black solid;";
+    });
+    leftWalls.forEach((elem) => {
+        elem.style.cssText = "border-left: 1px black solid;";
+    });
 }

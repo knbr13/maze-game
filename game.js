@@ -76,10 +76,13 @@ function youWin() {
 }
 function fallDown() {
     if (start.getBoundingClientRect().right < gameBounds.left) {
+        var fallingSoundEffect = document.createElement("audio");
+        fallingSoundEffect.src = "./sounds/cartoon_falling_sound_effect.mp3";
+        fallingSoundEffect.play();
         document.removeEventListener("mousemove", move);
         var interval = setInterval(() => {
             start.style.top = `${a}px`;
-            a += 1.8;
+            a += 2.5;
             start.getBoundingClientRect().bottom > innerHeight - 10 ? start.style.display = `none` : null;
         }, 1), a = 205;
         setTimeout(() => {

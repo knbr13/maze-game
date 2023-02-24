@@ -28,18 +28,22 @@ function checkForCollision(arrOfElements){
         && (start.getBoundingClientRect().bottom > elementBounds.bottom && start.getBoundingClientRect().top <= elementBounds.bottom) ){
             element.style.borderBottom = `3px solid red`;
             document.removeEventListener("mousemove", move);
+            youLose();
         }else if((start.getBoundingClientRect().left >= elementBounds.left - 40  && start.getBoundingClientRect().right <= elementBounds.right + 40) 
         && (start.getBoundingClientRect().bottom >= elementBounds.top && start.getBoundingClientRect().top < elementBounds.top) ){
             element.style.borderTop = `3px solid red`;
             document.removeEventListener("mousemove", move);
+            youLose();
         }else if( (start.getBoundingClientRect().top >= elementBounds.top - 40 && start.getBoundingClientRect().bottom <= elementBounds.bottom + 40) 
         && (start.getBoundingClientRect().right >= elementBounds.left && start.getBoundingClientRect().left < elementBounds.left) ){
             element.style.borderLeft = `3px solid red`;
             document.removeEventListener("mousemove", move);
+            youLose();
         }else if( (start.getBoundingClientRect().top >= elementBounds.top - 40 && start.getBoundingClientRect().bottom <= elementBounds.bottom + 40) 
         && (start.getBoundingClientRect().left <= elementBounds.right && start.getBoundingClientRect().right > elementBounds.right) ){
             element.style.borderRight = `3px solid red`;
             document.removeEventListener("mousemove", move);
+            youLose();
         }
     })
 }
@@ -47,6 +51,10 @@ function checkWin(){
     return start.getBoundingClientRect().right >= gameBounds.right - 40? true: false;
 }
 function youWin(){
+    var winSound = document.createElement("audio");
+    winSound.src = "./sounds/win_sound_effect.mp3";
+    winSound.volume = 100;
+    winSound.play();
     var you_win = document.createElement("h1");
     you_win.textContent = "You Win!";
     you_win.style.cssText = "z-index: 10; font-family: cursive; position: fixed; left: 45%; color: purple; top: 24%;";
@@ -68,8 +76,12 @@ function fallDown(){
             youLose();
         }, 1000);
     }
-}
+}  
 function youLose(){
+    var alertSound = document.createElement("audio");
+    alertSound.src = "./sounds/alert_sound.mp3";
+    alertSound.volume = 1;
+    alertSound.play();
     var you_lose = document.createElement("h1");
     you_lose.textContent = "You Lose!";
     you_lose.style.cssText = "z-index: 10; font-family: cursive; position: fixed; left: 45%; color: purple; top: 24%;";

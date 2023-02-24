@@ -4,6 +4,12 @@ var isClicked = false;
 var gameBounds = document.getElementById("game").getBoundingClientRect();
 var key = document.createElement('a');
 var topWalls = [], bottomWalls = [], rightWalls = [], leftWalls = [];
+var resetButton = document.createElement("button");
+resetButton.textContent = "reset game"
+resetButton.style.cssText = "position: relative; display: block; top: 120px; margin: auto;";
+boundaries[4].appendChild(resetButton);
+resetButton.addEventListener("click", () => location.reload());
+boundaries[boundaries.length - 1].textContent = `Score: 0`;
 key.style.cssText = "width: 10%; height: 10%; font-size: 12px; position: absolute; left: 38%; top: 33%; background-color: blue; border-radius: 40%; border: 0.1px solid white"
 start.appendChild(key);
 document.getElementById("end").addEventListener("mousedown", reset);
@@ -91,7 +97,7 @@ function youLose() {
     you_lose.style.cssText = "z-index: 10; font-family: cursive; position: fixed; left: 45%; color: purple; top: 24%;";
     document.getElementById("game").appendChild(you_lose);
     setTimeout(() => you_lose.remove(), 2000);
-    boundaries[boundaries.length - 1].textContent = `Score: ${Number((boundaries[boundaries.length - 1].textContent).slice(6)) - 5}`;
+    boundaries[boundaries.length - 1].textContent = `Score: ${Number((boundaries[boundaries.length - 1].textContent).slice(6)) - 10}`;
 }
 function reset(e) {
     start.style.cssText = "position: absolute; top: 205px";

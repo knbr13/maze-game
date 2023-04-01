@@ -1,5 +1,5 @@
 
-# Dice Game!
+# Maze Game!
 
 👨‍💻 Developer: Abdullah Alaadine
 

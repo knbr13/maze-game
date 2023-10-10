@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"os"
 )
 
 type cell struct {
@@ -71,9 +72,9 @@ func (b *board) String() string {
 			if i == b.playerYPos && j == b.playerXPos {
 				s += fmt.Sprint(PLAYER)
 			} else if col.isWall {
-				s += fmt.Sprint("#")
+				s += "#"
 			} else {
-				s += fmt.Sprint(" ")
+				s += " "
 			}
 		}
 		s += fmt.Sprintln()
@@ -83,6 +84,8 @@ func (b *board) String() string {
 
 func (b *board) handleMove(r rune) {
 	switch r {
+	case 'q':
+		os.Exit(0)
 	case 'w':
 		if b.playerYPos > 0 && !b.cells[b.playerYPos-1][b.playerXPos].isWall {
 			b.playerYPos--

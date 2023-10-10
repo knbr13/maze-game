@@ -1,11 +1,9 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"log"
 	"math/rand"
-	"os"
 	"strings"
 	"time"
 
@@ -25,25 +23,29 @@ func main() {
 
 	defer keyboard.Close()
 
-	reader := bufio.NewReader(os.Stdin)
-	runeReceiverChan := make(chan rune)
+	runeReceiverChan := make(chan rune, 1)
+	keyReceiverChan := make(chan keyboard.Key, 1)
 	ticker := time.NewTicker(time.Second)
 
-	for {
-		go func() {
-			r, _, err := reader.ReadRune()
+	go func() {
+		for {
+			r, key, err := keyboard.GetSingleKey()
 			if err == nil {
 				runeReceiverChan <- r
+				keyReceiverChan <- key
 			}
-		}()
+		}
+	}()
 
+	for {
 		select {
 		case <-ticker.C:
 			initialTime--
 			clearConsole()
 			fmt.Printf("%v\nremaining: %v\n", board, initialTime)
 		case r := <-runeReceiverChan:
-			board.handleMove(r)
+			key := <-keyReceiverChan
+			board.handleMove(r, key)
 			clearConsole()
 			fmt.Printf("%v\nremaining: %v\n", board, initialTime)
 		}

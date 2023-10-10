@@ -1,6 +1,9 @@
 package main
 
-import "math/rand"
+import (
+	"fmt"
+	"math/rand"
+)
 
 type cell struct {
 	isWall  bool
@@ -50,5 +53,18 @@ func (c *cells) carve(x, y int) {
 				c.carve(x-2, y)
 			}
 		}
+	}
+}
+
+func (c *cells) print() {
+	for i := range *c {
+		for j := range (*c)[i] {
+			if (*c)[i][j].isWall {
+				fmt.Print(" ")
+			} else {
+				fmt.Print("#")
+			}
+		}
+		fmt.Println()
 	}
 }

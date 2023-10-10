@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+
+	"github.com/eiannone/keyboard"
 )
 
 type cell struct {
@@ -82,23 +84,23 @@ func (b *board) String() string {
 	return s
 }
 
-func (b *board) handleMove(r rune) {
-	switch r {
-	case 'q':
+func (b *board) handleMove(r rune, key keyboard.Key) {
+	switch {
+	case r == 'q':
 		os.Exit(0)
-	case 'w':
+	case r == 'w' || key == keyboard.KeyArrowUp:
 		if b.playerYPos > 0 && !b.cells[b.playerYPos-1][b.playerXPos].isWall {
 			b.playerYPos--
 		}
-	case 'd':
+	case r == 'd' || key == keyboard.KeyArrowRight:
 		if b.playerXPos < len(b.cells[b.playerYPos])-1 && !b.cells[b.playerYPos][b.playerXPos+1].isWall {
 			b.playerXPos++
 		}
-	case 's':
+	case r == 's' || key == keyboard.KeyArrowDown:
 		if b.playerYPos < len(b.cells)-1 && !b.cells[b.playerYPos+1][b.playerXPos].isWall {
 			b.playerYPos++
 		}
-	case 'a':
+	case r == 'a' || key == keyboard.KeyArrowLeft:
 		if b.playerXPos > 0 && !b.cells[b.playerYPos][b.playerXPos-1].isWall {
 			b.playerXPos--
 		}

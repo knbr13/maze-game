@@ -3,10 +3,13 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"math/rand"
 	"os"
 	"strings"
 	"time"
+
+	"github.com/eiannone/keyboard"
 )
 
 func main() {
@@ -16,6 +19,11 @@ func main() {
 	clearConsole()
 	initialTime := 60
 	fmt.Println(board)
+	if err := keyboard.Open(); err != nil {
+		log.Fatal("error: cannot open keyboard: ", err)
+	}
+
+	defer keyboard.Close()
 
 	reader := bufio.NewReader(os.Stdin)
 	runeReceiverChan := make(chan rune)

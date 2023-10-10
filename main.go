@@ -10,8 +10,10 @@ func main() {
 	difficultyLevel := getDifficultyLevel()
 	board := initializeBoard(difficultyLevel)
 	board.cells.carve(board.playerXPos, board.playerYPos)
+	// clearConsole()
+	// initialTime := 60
+	board.print()
 
-	clearConsole()
 }
 
 func getDifficultyLevel() string {
@@ -36,14 +38,14 @@ func getDifficultyLevel() string {
 func initializeBoard(difficultyLevel string) *board {
 	switch difficultyLevel {
 	case "hard":
-		width, height := 25, 30
-		return &board{cells: initializeCells(width, height), playerXPos: (rand.Intn(width) + 1) * 2, playerYPos: (rand.Intn(height) + 1) * 2}
+		width, height := 32, 16
+		return &board{cells: initializeCells(width, height), playerXPos: (rand.Intn(width) * 2) + 1, playerYPos: (rand.Intn(height) * 2) + 1}
 	case "medium":
-		width, height := 15, 18
-		return &board{cells: initializeCells(width, height), playerXPos: (rand.Intn(width) + 1) * 2, playerYPos: (rand.Intn(height) + 1) * 2}
+		width, height := 24, 10
+		return &board{cells: initializeCells(width, height), playerXPos: (rand.Intn(width) * 2) + 1, playerYPos: (rand.Intn(height) * 2) + 1}
 	case "easy":
-		width, height := 10, 12
-		return &board{cells: initializeCells(width, height), playerXPos: (rand.Intn(width) + 1) * 2, playerYPos: (rand.Intn(height) + 1) * 2}
+		width, height := 2, 2
+		return &board{cells: initializeCells(width, height), playerXPos: (rand.Intn(width) * 2) + 1, playerYPos: (rand.Intn(height) * 2) + 1}
 	}
 	return &board{}
 }

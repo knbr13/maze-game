@@ -75,3 +75,24 @@ func (c *cells) print() {
 		fmt.Println()
 	}
 }
+
+func (b *board) handleMove(r rune) {
+	switch r {
+	case 'w':
+		if b.playerYPos > 0 && !b.cells[b.playerYPos-1][b.playerXPos].isWall {
+			b.playerYPos--
+		}
+	case 'd':
+		if b.playerXPos < len(b.cells[b.playerYPos])-1 && !b.cells[b.playerYPos][b.playerXPos+1].isWall {
+			b.playerXPos++
+		}
+	case 's':
+		if b.playerYPos < len(b.cells)-1 && !b.cells[b.playerYPos+1][b.playerXPos].isWall {
+			b.playerYPos++
+		}
+	case 'a':
+		if b.playerXPos > 0 && !b.cells[b.playerYPos][b.playerXPos-1].isWall {
+			b.playerXPos--
+		}
+	}
+}

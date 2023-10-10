@@ -41,6 +41,10 @@ func main() {
 		select {
 		case <-ticker.C:
 			initialTime--
+			if initialTime == 0 {
+				fmt.Println("you ran out of time :(")
+				return
+			}
 			clearConsole()
 			fmt.Printf("%v\nremaining: %v\n", board, initialTime)
 		case r := <-runeReceiverChan:

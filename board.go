@@ -64,19 +64,21 @@ func (c *cells) carve(x, y int) {
 	}
 }
 
-func (b *board) print() {
+func (b *board) String() string {
+	s := ""
 	for i, row := range b.cells {
 		for j, col := range row {
 			if i == b.playerYPos && j == b.playerXPos {
-				fmt.Print(PLAYER)
+				s += fmt.Sprint(PLAYER)
 			} else if col.isWall {
-				fmt.Print("#")
+				s += fmt.Sprint("#")
 			} else {
-				fmt.Print(" ")
+				s += fmt.Sprint(" ")
 			}
 		}
-		fmt.Println()
+		s += fmt.Sprintln()
 	}
+	return s
 }
 
 func (b *board) handleMove(r rune) {

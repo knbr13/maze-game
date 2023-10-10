@@ -35,14 +35,30 @@ func initializeCells(width, height int) cells {
 
 func (c *cells) carve(x, y int) {
 	(*c)[y][x].visited = true
+	(*c)[y][x].isWall = false
 	directions := rand.Perm(4)
 
 	for _, direction := range directions {
 		switch direction {
 		case 0:
-			if y-2 > 0 && !(*c)[y][x].visited {
+			if y-2 > 0 && !(*c)[y-2][x].visited {
 				(*c)[y-1][x].isWall = false
 				c.carve(x, y-2)
+			}
+		case 1:
+			if x+2 < len((*c)[y])-1 && !(*c)[y][x+2].visited {
+				(*c)[y][x+1].isWall = false
+				c.carve(x+2, y)
+			}
+		case 2:
+			if y+2 < len(*c)-1 && !(*c)[y+2][x].visited {
+				(*c)[y+1][x].isWall = false
+				c.carve(x, y+2)
+			}
+		case 3:
+			if x-2 > 0 && !(*c)[y][x-2].visited {
+				(*c)[y][x-1].isWall = false
+				c.carve(x-2, y)
 			}
 		}
 	}

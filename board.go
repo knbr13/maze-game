@@ -1,20 +1,54 @@
 package main
 
+import "math/rand"
+
 type cell struct {
 	isWall  bool
 	visited bool
 }
 
+type cells [][]cell
+
 type board struct {
-	cells      [][]cell
+	cells      cells
 	playerXPos int
 	playerYPos int
 }
 
-func initializeCells(width, height int) [][]cell {
-	cells := make([][]cell, height)
+func initializeCells(width, height int) cells {
+	cells := make(cells, height)
 	for i := range cells {
 		cells[i] = make([]cell, width)
 	}
 	return cells
+}
+
+func (c *cells) carve(x, y int) {
+	(*c)[y][x].isWall = true
+	directions := rand.Perm(4)
+
+	for _, direction := range directions {
+		switch direction {
+		case 0:
+			if y-2 >= 0 && !(*c)[y-2][x].isWall {
+				(*c)[y-1][x].isWall = true
+				c.carve(x, y-2)
+			}
+		case 1:
+			if x+2 < len((*c)[0]) && !(*c)[y][x+2].isWall {
+				(*c)[y][x+1].isWall = true
+				c.carve(x+2, y)
+			}
+		case 2:
+			if y+2 < len(*c) && !(*c)[y+2][x].isWall {
+				(*c)[y+1][x].isWall = true
+				c.carve(x, y+2)
+			}
+		case 3:
+			if x-2 >= 0 && !(*c)[y][x-2].isWall {
+				(*c)[y][x-1].isWall = true
+				c.carve(x-2, y)
+			}
+		}
+	}
 }

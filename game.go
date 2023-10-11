@@ -8,7 +8,7 @@ import (
 
 const (
 	PLAYER = "┃"
-	GATE   = "G"
+	GATE   = "┃"
 )
 
 func (b *board) checkWin() bool {

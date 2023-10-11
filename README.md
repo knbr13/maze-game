@@ -22,7 +22,7 @@ Maze Game is a simple text-based game implemented in Go. It generates mazes usin
 
 ## Prerequisites
 
-To run this game, you need to have Go installed on your system. You can download and install Go from the [official website](https://golang.org/dl/).
+To run this game, you need to have Go installed on your system. You can download and install Go from the [official website](https://go.dev/dl/).
 
 ## Installation
 

@@ -23,11 +23,6 @@ type board struct {
 	gateYPos   int
 }
 
-const (
-	PLAYER = "┃"
-	GATE   = "G"
-)
-
 func initializeCells(width, height int) cells {
 	cells := make(cells, height*2+1)
 	for i := range cells {

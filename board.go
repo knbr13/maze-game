@@ -19,6 +19,8 @@ type board struct {
 	cells      cells
 	playerXPos int
 	playerYPos int
+	gateXPos   int
+	gateYPos   int
 }
 
 const (
@@ -107,7 +109,7 @@ func (b *board) handleMove(r rune, key keyboard.Key) {
 	}
 }
 
-func findFarthestPoint(c cells, startX, startY int) (int, int) {
+func FindFarthestPoint(c cells, startX, startY int) (int, int) {
 	distances := make([][]int, len(c))
 	for i := range distances {
 		distances[i] = make([]int, len(c[i]))

@@ -1,6 +1,6 @@
 # Maze Game
 
-Maze Game is a simple text-based game implemented in Go. It generates mazes using the Recursive Backtracking algorithm and lets players navigate through the maze to reach the exit. The objective is to reach the exit before running out of time.
+Maze Game is a simple text-based game implemented in Go. It generates mazes using the Recursive Backtracking algorithm and lets players navigate through the maze to reach the gate (exit). The objective is to reach the gate before running out of time.
 
 ## Table of Contents
 
@@ -18,7 +18,7 @@ Maze Game is a simple text-based game implemented in Go. It generates mazes usin
 - Difficulty levels: easy, medium, and hard.
 - Timer to add a time-based challenge.
 - Visually appealing ASCII characters to represent walls, the player, and the exit.
-- Dynamic placement of the exit to make it as far as possible from the starting position.
+- Dynamic placement of the gate to make it as far as possible from the starting position.
 
 ## Prerequisites
 

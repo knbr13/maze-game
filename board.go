@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/eiannone/keyboard"
+	"github.com/gookit/color"
 )
 
 type cell struct {
@@ -70,11 +71,12 @@ func (b *board) String() string {
 	for i, row := range b.cells {
 		for j, col := range row {
 			if i == b.playerYPos && j == b.playerXPos {
-				s += fmt.Sprint(PLAYER)
+				s += color.LightBlue.Sprint(PLAYER)
 			} else if col.isWall {
-				s += "▪"
+				s += color.Sprint("▒")
+				// s += "▪"
 			} else if i == b.gateYPos && j == b.gateXPos {
-				s += fmt.Sprint(GATE)
+				s += color.LightYellow.Sprint(GATE)
 			} else {
 				s += " "
 			}

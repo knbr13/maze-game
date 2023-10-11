@@ -78,6 +78,8 @@ func (b *board) String() string {
 				s += fmt.Sprint(PLAYER)
 			} else if col.isWall {
 				s += "#"
+			} else if i == b.gateYPos && j == b.gateXPos {
+				s += fmt.Sprint(GATE)
 			} else {
 				s += " "
 			}

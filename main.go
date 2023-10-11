@@ -52,6 +52,10 @@ func main() {
 			board.handleMove(r, key)
 			clearConsole()
 			fmt.Printf("%v\nremaining: %v\n", board, initialTime)
+			if board.checkWin() {
+				fmt.Println("you won the game!")
+				return
+			}
 		}
 	}
 }

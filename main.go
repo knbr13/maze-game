@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"time"
@@ -13,8 +14,11 @@ func main() {
 	board := initializeBoard(difficultyLevel)
 	board.cells.carve(board.playerXPos, board.playerYPos)
 	clearConsole()
-	initialTime := 60
+	initialTime := flag.Int("time", 60, "time limit to reach the gate in seconds")
+	flag.Parse()
+
 	fmt.Println(board)
+
 	if err := keyboard.Open(); err != nil {
 		log.Fatal("error: cannot open keyboard: ", err)
 	}
@@ -38,18 +42,18 @@ func main() {
 	for {
 		select {
 		case <-ticker.C:
-			initialTime--
-			if initialTime == 0 {
+			*initialTime--
+			if *initialTime == 0 {
 				fmt.Println("you ran out of time :(")
 				return
 			}
 			clearConsole()
-			fmt.Printf("%v\nremaining: %v seconds\n", board, initialTime)
+			fmt.Printf("%v\nremaining: %v seconds\n", board, *initialTime)
 		case r := <-runeReceiverChan:
 			key := <-keyReceiverChan
 			board.handleMove(r, key)
 			clearConsole()
-			fmt.Printf("%v\nremaining: %v seconds\n", board, initialTime)
+			fmt.Printf("%v\nremaining: %v seconds\n", board, *initialTime)
 			if board.checkWin() {
 				fmt.Println("you won the game!")
 				return

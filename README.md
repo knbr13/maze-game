@@ -57,6 +57,7 @@ To run this game, you need to have Go installed on your system. You can download
 - Use the arrow keys (up, down, left, right) or the W, A, S, D keys to move the player.
 - Your objective is to reach the gate before the timer runs out.
 - Different difficulty levels (easy, medium, hard) offer mazes of varying complexity.
+- You can exit the game by pressing on 'q' key on the keyboard.
 
 ## Contributing
 

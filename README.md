@@ -16,7 +16,7 @@ Maze Game is a simple text-based game implemented in Go. It generates mazes usin
 ## Features
 
 - Random maze generation using the Recursive Backtracking algorithm.
-- Player navigation with arrow keys (up, down, left, right) or W, A, S, D keys.
+- Player navigation with arrow keys ( `↑` , `→` , `↓` , `←` ) or `W`, `D`, `S`, `A` keys.
 - Difficulty levels: easy, medium, and hard.
 - Timer to add a time-based challenge.
 - Visually appealing ASCII characters to represent walls, the player, and the exit.
@@ -54,7 +54,7 @@ To run this game, you need to have Go installed on your system. You can download
 
 ## How to Play
 
-- Use the arrow keys (up, down, left, right) or the W, A, S, D keys to move the player.
+- Use the arrow keys ( `↑` , `→` , `↓` , `←` ) or the `W`, `D`, `S`, `A` keys to move the player.
 - Your objective is to reach the gate before the timer runs out.
 - You can modify the time limit by providing a time in seconds for the `-time` flag when running the game. For example:
 

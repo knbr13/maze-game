@@ -56,8 +56,15 @@ To run this game, you need to have Go installed on your system. You can download
 
 - Use the arrow keys (up, down, left, right) or the W, A, S, D keys to move the player.
 - Your objective is to reach the gate before the timer runs out.
+- You can modify the time limit by providing a time in seconds for the `-time` flag when running the game. For example:
+
+    ```sh
+    ./maze-game -time=120
+    ```
+
+  This command sets the time limit to 2 minutes (120 seconds) // the default value is 1 min (60 seconds)
 - Different difficulty levels (easy, medium, hard) offer mazes of varying complexity.
-- You can exit the game by pressing on 'q' key on the keyboard.
+- You can exit the game by pressing on `q` key on the keyboard.
 
 ## Contributing
 

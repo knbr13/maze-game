@@ -1,5 +1,7 @@
 # Maze Game
 
+![Maze Game Gif](./maze-game.gif)
+
 Maze Game is a simple text-based game implemented in Go. It generates mazes using the Recursive Backtracking algorithm and lets players navigate through the maze to reach the exit. The objective is to reach the exit before running out of time.
 
 ## Table of Contents

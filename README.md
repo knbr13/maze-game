@@ -31,7 +31,7 @@ To run this game, you need to have Go installed on your system. You can download
 1.  Clone the repository to your local machine:
 
     ```sh
-    git clone https://github.com/abdullah-alaadine/maze-game.git
+    git clone https://github.com/knbr13/maze-game.git
     ```
 
 2.  Navigate to the project directory:

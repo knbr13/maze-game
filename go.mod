@@ -1,4 +1,4 @@
-module github.com/abdullah-alaadine/maze-game
+module github.com/knbr13/maze-game
 
 go 1.21.1
 

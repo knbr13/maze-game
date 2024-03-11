@@ -14,7 +14,20 @@ func main() {
 	board := initializeBoard(difficultyLevel)
 	board.cells.carve(board.playerXPos, board.playerYPos)
 	clearConsole()
-	initialTime := flag.Int("time", 60, "time limit to reach the gate in seconds")
+
+	defaultInitialTime := func(difficulty Difficulty) int {
+		switch difficulty {
+		case EASY_LEVEL:
+			return 60
+		case MEDIUM_LEVEL:
+			return 90
+		case HARD_LEVEL:
+			return 120
+		default:
+			return 90
+		}
+	}(Difficulty(difficultyLevel))
+	initialTime := flag.Int("time", defaultInitialTime, "time limit to reach the gate in seconds")
 	flag.Parse()
 
 	fmt.Println(board)

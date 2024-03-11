@@ -11,6 +11,14 @@ const (
 	GATE   = "┃"
 )
 
+type Difficulty string
+
+const (
+	EASY_LEVEL   Difficulty = "easy"
+	MEDIUM_LEVEL Difficulty = "medium"
+	HARD_LEVEL   Difficulty = "hard"
+)
+
 func (b *board) checkWin() bool {
 	if b.playerXPos == b.gateXPos && b.playerYPos == b.gateYPos {
 		return true
@@ -20,7 +28,7 @@ func (b *board) checkWin() bool {
 
 func getDifficultyLevel() string {
 	var difficulty string
-	validDifficultyLevels := []string{"easy", "medium", "hard"}
+	validDifficultyLevels := []Difficulty{EASY_LEVEL, MEDIUM_LEVEL, HARD_LEVEL}
 
 	for {
 		fmt.Print("Choose a difficulty level (easy, medium, or hard): ")
@@ -28,7 +36,7 @@ func getDifficultyLevel() string {
 		difficulty = strings.ToLower(difficulty)
 
 		for _, validLevel := range validDifficultyLevels {
-			if difficulty == validLevel {
+			if difficulty == string(validLevel) {
 				return difficulty
 			}
 		}
